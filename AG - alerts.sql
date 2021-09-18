@@ -112,11 +112,22 @@ EXEC msdb.dbo.sp_add_alert @name=N'Availability Groups Error - 41405 - not ready
   @job_id=N'00000000-0000-0000-0000-000000000000'
 
   GO 
+
+--AlwaysOn Availability Groups Role Change
+
+  EXEC msdb.dbo.sp_add_alert @name=N'AlwaysOn - Role Changed', 
+		@message_id=1480, 
+		@severity=0, 
+		@enabled=1, 
+		@delay_between_responses=0, 
+		@include_event_description_in=1, 
+		@category_name=N'[Uncategorized]', 
+		@job_id=N'00000000-0000-0000-0000-000000000000'
   
       
 
 
-DECLARE @OperatorName nvarchar(100)='DBAResponse' --TODO: change
+DECLARE @OperatorName nvarchar(100)='dba' --TODO: change
 EXEC msdb.dbo.sp_add_notification @alert_name=N'Availability Groups Error - 35273 - bypassing recovery', @operator_name=@OperatorName, @notification_method = 1;
 EXEC msdb.dbo.sp_add_notification @alert_name=N'Availability Groups Error - 35276 - failed to allocate database', @operator_name=@OperatorName, @notification_method = 1;
 EXEC msdb.dbo.sp_add_notification @alert_name=N'Availability Groups Error - 35274 - recovery pending', @operator_name=@OperatorName, @notification_method = 1;
@@ -127,6 +138,7 @@ EXEC msdb.dbo.sp_add_notification @alert_name=N'Availability Groups Error - 3526
 EXEC msdb.dbo.sp_add_notification @alert_name=N'Availability Groups Error - 35265 - data movement resumed', @operator_name=@OperatorName, @notification_method = 1;
 EXEC msdb.dbo.sp_add_notification @alert_name=N'Availability Groups Error - 41404 - AG offline', @operator_name=@OperatorName, @notification_method = 1;
 EXEC msdb.dbo.sp_add_notification @alert_name=N'Availability Groups Error - 41405 - not ready for automatic failover', @operator_name=@OperatorName, @notification_method = 1;
+EXEC msdb.dbo.sp_add_notification @alert_name=N'AlwaysOn - Role Changed', @operator_name=@OperatorName, @notification_method = 1;
 GO 
 
  
